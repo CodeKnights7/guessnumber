@@ -1,7 +1,7 @@
 'use strict';
 let getnumber = () => Math.trunc(Math.random() * 20) + 1;
 let number = getnumber();
-document.querySelector('.number').value = number;
+
 console.log(number);
 
 let score = 0;
@@ -16,6 +16,7 @@ const check = document
     if (result === number) {
       document.querySelector('.message').textContent =
         'Yeah!.. You are Right in guessing number🎉✔';
+      document.querySelector('.number').textContent = number; // Show number only if guessed correctly
       score += 1;
       document.querySelector('body').style.backgroundColor = '#60b347';
       document.querySelector('.number').style.width = '30rem';
@@ -24,17 +25,14 @@ const check = document
     } else if (result > number) {
       document.querySelector('.message').textContent =
         'Too high!📈... Try again🦾';
+      document.querySelector('.score').textContent = score; // Keep the current score displayed
       score = 0; // Reset the score to zero only if there is a mismatch
     } else if (result < number) {
       document.querySelector('.message').textContent =
         'Too low!📉... Try again🦾';
-      score = 0; // Reset the score to zero only if there is a mismatch
-    } else {
-      document.querySelector('.message').textContent =
-        'Sorry!... it was incorrect number, Let try again🦾 ';
+      document.querySelector('.score').textContent = score; // Keep the current score displayed
       score = 0; // Reset the score to zero only if there is a mismatch
     }
-    document.querySelector('.number').textContent = number;
   });
 
 const reset = () => {
@@ -46,7 +44,8 @@ const reset = () => {
   document.querySelector('.message').textContent = 'Start guessing...';
   document.querySelector('.number').textContent = '?';
   document.querySelector('.guess').value = '';
-  document.querySelector('.score').textContent = 0; // Keep the current score displayed
+  document.querySelector('.score').textContent = 0; // Reset the score display to zero for a new game
+  score = 0; // Reset the current score
   console.log(number);
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
